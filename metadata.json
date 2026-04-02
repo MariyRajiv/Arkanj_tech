@@ -1,0 +1,7 @@
+{
+  "name": "Arkanj Tech Solutions",
+  "description": "Professional AI-driven automation and software solutions provider.",
+  "requestFramePermissions": [
+    "geolocation"
+  ]
+}
