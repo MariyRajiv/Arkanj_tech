@@ -7,6 +7,7 @@ import Contact from './pages/Contact';
 import CustomerCabinet from './pages/CustomerCabinet';
 import Services from './pages/Services';
 import About from './pages/About';
+import { UserProvider } from './UserContext';
 
 function ScrollToTop() {
   const { pathname, hash } = useLocation();
@@ -25,21 +26,23 @@ function ScrollToTop() {
 
 export default function App() {
   return (
-    <Router>
-      <ScrollToTop />
-      <div className="flex flex-col min-h-screen">
-        <Navbar />
-        <main className="flex-grow">
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/contact" element={<Contact />} />
-            <Route path="/customer-cabinet" element={<CustomerCabinet />} />
-            <Route path="/services" element={<Services />} />
-            <Route path="/about" element={<About />} />
-          </Routes>
-        </main>
-        <Footer />
-      </div>
-    </Router>
+    <UserProvider>
+      <Router>
+        <ScrollToTop />
+        <div className="flex flex-col min-h-screen">
+          <Navbar />
+          <main className="flex-grow">
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/contact" element={<Contact />} />
+              <Route path="/customer-cabinet" element={<CustomerCabinet />} />
+              <Route path="/services" element={<Services />} />
+              <Route path="/about" element={<About />} />
+            </Routes>
+          </main>
+          <Footer />
+        </div>
+      </Router>
+    </UserProvider>
   );
 }

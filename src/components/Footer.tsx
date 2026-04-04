@@ -14,7 +14,7 @@ export default function Footer() {
               <img 
                 src="https://arkanj.tech/wp-content/uploads/2026/03/cropped-arkanj_logo_white_transparent-2048x1344.png" 
                 alt="Arkanj Tech Logo" 
-                className="h-12 w-auto object-contain" 
+                className="h-20 w-auto object-contain" 
                 referrerPolicy="no-referrer"
               />
             </Link>
