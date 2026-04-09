@@ -12,7 +12,7 @@ export default function Footer() {
           <div className="col-span-1 md:col-span-4">
             <Link to="/" className="flex items-center gap-3 mb-8 group">
               <img 
-                src="https://arkanj.tech/wp-content/uploads/2026/03/cropped-arkanj_logo_white_transparent-2048x1344.png" 
+                src="/logo.png" 
                 alt="Arkanj Tech Logo" 
                 className="h-20 w-auto object-contain" 
                 referrerPolicy="no-referrer"

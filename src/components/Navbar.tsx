@@ -5,6 +5,7 @@ import { Menu, X, BrainCircuit, LogOut, User } from 'lucide-react';
 import { cn } from '@/src/lib/utils';
 import { useUser } from '@/src/UserContext';
 
+
 export default function Navbar() {
   const [isOpen, setIsOpen] = React.useState(false);
   const location = useLocation();
@@ -30,9 +31,9 @@ export default function Navbar() {
           <div className="flex items-center">
             <Link to="/" className="flex items-center gap-3 group">
               <img 
-                src="https://arkanj.tech/wp-content/uploads/2026/03/cropped-arkanj_logo_white_transparent-2048x1344.png" 
+                src="/logo.png" 
                 alt="Arkanj Tech Logo" 
-                className="h-20 w-auto object-contain brightness-0" 
+                className="h-20 w-auto object-contain" 
                 referrerPolicy="no-referrer"
               />
             </Link>
