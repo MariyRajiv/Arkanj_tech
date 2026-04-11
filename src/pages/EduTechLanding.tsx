@@ -15,7 +15,7 @@ export default function EduTechLanding() {
       progress: 85,
       flag: '🇩🇪',
       isNew: true,
-      link: '/german'
+      link: '/edutech/german'
     },
     {
       name: 'French',

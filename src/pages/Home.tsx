@@ -201,8 +201,10 @@ export default function Home() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
           >
-            <h2 className="text-5xl md:text-6xl font-extrabold text-brand-navy mb-8 tracking-tight">Unlock Your Competitive Edge Now</h2>
-            <div className="text-xl text-slate-500 mb-12 leading-relaxed text-center">
+            <h2 className="text-4xl md:text-6xl font-bold text-slate-900 mb-6 tracking-tight leading-tight">
+              Unlock Your <span className="text-brand-blue bg-clip-text text-transparent bg-gradient-to-r from-brand-blue to-brand-accent">Competitive Edge</span> Now
+            </h2>
+            <div className="text-lg text-slate-500 mb-12 leading-relaxed text-center max-w-3xl mx-auto">
               <p className="mb-6">
                 <span className="font-bold text-slate-900">Your ambition, powered by our intelligence.</span> We don’t just provide software; we build the technological 
                 backbone of your future. By partnering with us, you gain a dedicated innovation engine that turns your 
