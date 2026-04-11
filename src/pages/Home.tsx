@@ -5,11 +5,12 @@ import { Link, useNavigate } from 'react-router-dom';
 import Markdown from 'react-markdown';
 import { SERVICES } from '@/src/types';
 import BookingModal from '@/src/components/BookingModal';
-import { CustomEditIcon } from '@/src/components/CustomIcons';
+import { UpTechIcon, FinTechIcon, EduTechIcon, DeepTechIcon, MedTechIcon, LaunchTechIcon } from '@/src/components/CustomIcons';
 import { cn } from '@/src/lib/utils';
 
 const iconMap: Record<string, any> = {
-  Cpu, LayoutGrid, Send, Lightbulb, CreditCard, User, CustomEditIcon
+  Cpu, LayoutGrid, Send, Lightbulb, CreditCard, User, 
+  UpTechIcon, FinTechIcon, EduTechIcon, DeepTechIcon, MedTechIcon, LaunchTechIcon
 };
 
 export default function Home() {
@@ -256,21 +257,63 @@ export default function Home() {
                   viewport={{ once: true }}
                   transition={{ delay: i * 0.1, duration: 0.5 }}
                   whileHover={{ y: -10, scale: 1.02 }}
-                  className="group card-modern relative overflow-hidden"
+                  className={cn(
+                    "group card-modern relative overflow-hidden transition-all duration-500",
+                    service.highlighted 
+                      ? "bg-brand-navy border-brand-blue shadow-[0_20px_50px_rgba(59,130,246,0.3)] ring-1 ring-brand-blue/50" 
+                      : "bg-white border-slate-100"
+                  )}
                 >
-                  <div className="absolute top-0 right-0 w-32 h-32 bg-brand-blue/5 blur-3xl rounded-full -mr-16 -mt-16 group-hover:bg-brand-blue/10 transition-colors" />
-                  <div className="w-16 h-16 bg-brand-light rounded-2xl flex items-center justify-center mb-8 group-hover:bg-brand-blue group-hover:text-white transition-all duration-500 group-hover:scale-110 group-hover:rotate-3 shadow-sm">
-                    <Icon className="w-8 h-8 text-brand-blue group-hover:text-white transition-colors" />
+                  {service.highlighted && (
+                    <div className="absolute top-0 right-0 w-full h-1 bg-gradient-to-r from-brand-blue via-brand-accent to-brand-blue animate-gradient-x" />
+                  )}
+                  <div className={cn(
+                    "absolute top-0 right-0 w-32 h-32 blur-3xl rounded-full -mr-16 -mt-16 transition-colors",
+                    service.highlighted ? "bg-brand-blue/20" : "bg-brand-blue/5 group-hover:bg-brand-blue/10"
+                  )} />
+                  <div className={cn(
+                    "w-16 h-16 rounded-2xl flex items-center justify-center mb-8 transition-all duration-500 group-hover:scale-110 group-hover:rotate-3 shadow-sm",
+                    service.highlighted ? "bg-brand-blue text-white shadow-lg shadow-brand-blue/40" : "bg-brand-light text-brand-blue group-hover:bg-brand-blue group-hover:text-white"
+                  )}>
+                    <Icon className="w-12 h-12" />
                   </div>
-                  <h3 className="text-2xl font-bold text-brand-navy mb-4 group-hover:text-brand-blue transition-colors">{service.title}</h3>
-                  <div className="text-slate-500 leading-relaxed mb-8 markdown-content">
+                  <h3 className={cn(
+                    "text-2xl font-bold mb-4 transition-colors",
+                    service.highlighted ? "text-white group-hover:text-brand-blue" : "text-brand-navy group-hover:text-brand-blue"
+                  )}>{service.title}</h3>
+                  <div className={cn(
+                    "leading-relaxed mb-8 markdown-content",
+                    service.highlighted ? "text-slate-300" : "text-slate-500"
+                  )}>
                     <Markdown>{service.description}</Markdown>
                   </div>
-                  <div className="pt-8 border-t border-slate-100 flex items-center justify-between">
-                    <span className="text-xs font-bold text-slate-400 uppercase tracking-widest">{service.category}</span>
-                    <button className="text-brand-blue font-bold text-sm flex items-center gap-2 group-hover:gap-3 transition-all">
-                      Learn More <ArrowRight className="w-4 h-4" />
-                    </button>
+                  <div className={cn(
+                    "pt-8 border-t flex items-center justify-between",
+                    service.highlighted ? "border-white/10" : "border-slate-100"
+                  )}>
+                    <span className={cn(
+                      "text-xs font-bold uppercase tracking-widest",
+                      service.highlighted ? "text-brand-blue" : "text-slate-400"
+                    )}>{service.category}</span>
+                    {service.id === 'edutech' ? (
+                      <Link 
+                        to="/edutech"
+                        className={cn(
+                          "font-bold text-sm flex items-center gap-2 group-hover:gap-3 transition-all text-brand-blue"
+                        )}
+                      >
+                        Get Started <ArrowRight className="w-4 h-4" />
+                      </Link>
+                    ) : (
+                      <button 
+                        onClick={() => setIsBookingOpen(true)}
+                        className={cn(
+                          "font-bold text-sm flex items-center gap-2 group-hover:gap-3 transition-all text-brand-blue"
+                        )}
+                      >
+                        Get Started <ArrowRight className="w-4 h-4" />
+                      </button>
+                    )}
                   </div>
                 </motion.div>
               );
@@ -294,91 +337,72 @@ export default function Home() {
             </p>
           </motion.div>
 
-          {/* Bento Grid Layout */}
-          <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6 auto-rows-[250px]">
+          {/* Portfolio Grid Layout */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {[
               {
-                img: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=800",
-                title: "FinTech Automation",
-                category: "AI Implementation",
-                className: "md:col-span-2 md:row-span-2"
+                img: "/port1.jpeg",
+                title: "Digital Financial Systems",
+                
               },
               {
-                img: "https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&q=80&w=800",
-                title: "Neural Network",
-                category: "Deep Learning",
-                className: "md:col-span-1 md:row-span-1"
+                img: "/port2.jpeg",
+                title: "Artificial Intelligence",
+               
               },
               {
-                img: "https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&q=80&w=800",
-                title: "Smart Logistics",
-                category: "Analytics",
-                className: "md:col-span-1 md:row-span-2"
+                img: "/port3.jpeg",
+                title: "Supply Chain",
+                
               },
               {
-                img: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&q=80&w=800",
-                title: "E-commerce AI",
-                category: "Personalization",
-                className: "md:col-span-1 md:row-span-1"
+                img: "/port4.jpeg",
+                title: "Retail Industry",
+           
               },
               {
-                img: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=800",
-                title: "Data Viz",
-                category: "Intelligence",
-                className: "md:col-span-2 md:row-span-1"
+                img: "/port5.jpeg",
+                title: "Business Intelligence",
+                
               },
               {
-                img: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&q=80&w=800",
-                title: "Cloud Infrastructure",
-                category: "DevOps",
-                className: "md:col-span-1 md:row-span-1"
-              },
-              {
-                title: "Innovation Lab",
-                category: "R&D",
-                className: "md:col-span-1 md:row-span-1",
-                isSpecial: true
+                img: "/port6.jpeg",
+                title: "DevOps & Cloud",
+                
               }
             ].map((item: any, i) => (
               <motion.div 
                 key={i}
-                initial={{ opacity: 0, y: 20 }}
+                initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ delay: i * 0.1 }}
-                whileHover={{ y: -8 }}
-                className={`group relative rounded-[2rem] overflow-hidden shadow-xl border-4 border-white ${item.className}`}
+                transition={{ delay: i * 0.1, duration: 0.5 }}
+                whileHover={{ y: -12 }}
+                className="group relative rounded-[2.5rem] overflow-hidden shadow-2xl border-4 border-white aspect-[4/3] bg-slate-200"
               >
-                {item.isSpecial ? (
-                  <div className="w-full h-full p-8 flex flex-col justify-between bg-gradient-to-br from-brand-navy to-brand-blue text-white">
-                    <div className="flex justify-between items-start">
-                      <div className="w-12 h-12 bg-white/10 backdrop-blur-md rounded-xl flex items-center justify-center">
-                        <Cpu className="w-6 h-6 text-brand-blue" />
-                      </div>
-                      <div className="flex gap-1">
-                        <div className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-                        <span className="text-[10px] font-bold uppercase tracking-wider text-emerald-400">Live Lab</span>
-                      </div>
-                    </div>
-                    <div>
-                      <div className="text-3xl font-black mb-1 tracking-tighter">24/7</div>
-                      <div className="text-xs font-bold text-white/60 uppercase tracking-widest">Active Monitoring</div>
-                    </div>
-                    <div className="text-sm font-medium leading-tight text-white/80">
-                      Our AI agents are constantly learning and evolving.
-                    </div>
+                <img 
+                  src={item.img} 
+                  alt={item.title}
+                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                  onError={(e) => {
+                    (e.target as HTMLImageElement).src = `https://picsum.photos/seed/port${i+1}/800/600`;
+                  }}
+                  referrerPolicy="no-referrer"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-brand-navy/90 via-brand-navy/20 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500" />
+                
+                <div className="absolute inset-0 p-8 flex flex-col justify-end translate-y-8 group-hover:translate-y-0 opacity-0 group-hover:opacity-100 transition-all duration-500">
+                  <div className="text-brand-blue font-bold text-xs uppercase tracking-[0.2em] mb-2">
+                    {item.category}
                   </div>
-                ) : (
-                  <>
-                    <img src={item.img} alt={item.title} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" referrerPolicy="no-referrer" />
-                    <div className="absolute inset-0 bg-gradient-to-t from-brand-navy/90 via-brand-navy/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-end p-8">
-                      <div className="text-left transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
-                        <div className="text-white font-bold text-2xl mb-1">{item.title}</div>
-                        <div className="text-brand-blue text-sm font-bold uppercase tracking-widest">{item.category}</div>
-                      </div>
-                    </div>
-                  </>
-                )}
+                  <h3 className="text-2xl font-bold text-white mb-4">
+                    {item.title}
+                  </h3>
+                  <div className="flex items-center gap-2 text-white/80 text-sm font-medium">
+                    <span>View Project</span>
+                    <ArrowRight className="w-4 h-4 group-hover:translate-x-2 transition-transform" />
+                  </div>
+                </div>
               </motion.div>
             ))}
           </div>

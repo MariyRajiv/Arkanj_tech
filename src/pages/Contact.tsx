@@ -1,8 +1,33 @@
 import React from 'react';
-import { motion } from 'motion/react';
-import { Mail, Phone, MapPin, Send } from 'lucide-react';
+import { motion, AnimatePresence } from 'motion/react';
+import { Mail, Phone, MapPin, Send, X, CheckCircle2, ChevronRight } from 'lucide-react';
 
 export default function Contact() {
+  const [formData, setFormData] = React.useState({
+    name: '',
+    email: '',
+    phone: '',
+    message: ''
+  });
+  const [isSubmitted, setIsSubmitted] = React.useState(false);
+  const [isSubmitting, setIsSubmitting] = React.useState(false);
+
+  const isFormValid = formData.name.trim() !== '' && 
+                      formData.email.trim() !== '' && 
+                      formData.message.trim() !== '';
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!isFormValid) return;
+
+    setIsSubmitting(true);
+    // Simulate API call
+    await new Promise(resolve => setTimeout(resolve, 1500));
+    setIsSubmitting(false);
+    setIsSubmitted(true);
+    setFormData({ name: '', email: '', phone: '', message: '' });
+  };
+
   return (
     <div className="pt-20">
       <section className="py-24 bg-brand-light">
@@ -15,25 +40,62 @@ export default function Contact() {
             >
               <h1 className="text-4xl font-bold text-brand-navy mb-8">Request Free Consultation</h1>
               <div className="glass p-6 md:p-8 rounded-3xl shadow-xl">
-                <form className="space-y-4">
+                <form onSubmit={handleSubmit} className="space-y-4">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div className="space-y-1">
+                      <label className="text-xs font-bold text-slate-500 uppercase tracking-wider ml-1">Full Name *</label>
+                      <input
+                        type="text"
+                        required
+                        value={formData.name}
+                        onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                        placeholder="John Doe"
+                        className="w-full p-4 border border-slate-200 rounded-xl focus:ring-2 focus:ring-brand-blue/20 outline-none transition-all hover:border-brand-blue/30"
+                      />
+                    </div>
+                    <div className="space-y-1">
+                      <label className="text-xs font-bold text-slate-500 uppercase tracking-wider ml-1">Email Address *</label>
+                      <input
+                        type="email"
+                        required
+                        value={formData.email}
+                        onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                        placeholder="john@example.com"
+                        className="w-full p-4 border border-slate-200 rounded-xl focus:ring-2 focus:ring-brand-blue/20 outline-none transition-all hover:border-brand-blue/30"
+                      />
+                    </div>
+                  </div>
+                  <div className="space-y-1">
+                    <label className="text-xs font-bold text-slate-500 uppercase tracking-wider ml-1">Phone Number (Optional)</label>
                     <input
-                      type="text"
-                      placeholder="Your Name *"
-                      className="w-full p-4 border border-slate-200 rounded-xl focus:ring-2 focus:ring-brand-blue/20 outline-none"
-                    />
-                    <input
-                      type="email"
-                      placeholder="Your Email *"
-                      className="w-full p-4 border border-slate-200 rounded-xl focus:ring-2 focus:ring-brand-blue/20 outline-none"
+                      type="tel"
+                      value={formData.phone}
+                      onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                      placeholder="+91 XXXXX XXXXX"
+                      className="w-full p-4 border border-slate-200 rounded-xl focus:ring-2 focus:ring-brand-blue/20 outline-none transition-all hover:border-brand-blue/30"
                     />
                   </div>
-                  <textarea
-                    placeholder="Your Message *"
-                    className="w-full p-4 border border-slate-200 rounded-xl focus:ring-2 focus:ring-brand-blue/20 outline-none h-40"
-                  />
-                  <button className="w-full bg-brand-blue text-white py-4 rounded-xl font-bold text-lg hover:bg-brand-navy transition-all flex items-center justify-center gap-2">
-                    SUBMIT <Send className="w-5 h-5" />
+                  <div className="space-y-1">
+                    <label className="text-xs font-bold text-slate-500 uppercase tracking-wider ml-1">Your Message *</label>
+                    <textarea
+                      required
+                      value={formData.message}
+                      onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                      placeholder="How can we help you?"
+                      className="w-full p-4 border border-slate-200 rounded-xl focus:ring-2 focus:ring-brand-blue/20 outline-none h-40 transition-all hover:border-brand-blue/30 resize-none"
+                    />
+                  </div>
+                  <button 
+                    disabled={!isFormValid || isSubmitting}
+                    className="w-full bg-brand-blue text-white py-4 rounded-xl font-bold text-lg hover:bg-brand-navy transition-all flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed group"
+                  >
+                    {isSubmitting ? (
+                      <div className="w-6 h-6 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                    ) : (
+                      <>
+                        SUBMIT <Send className="w-5 h-5 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+                      </>
+                    )}
                   </button>
                 </form>
               </div>
@@ -54,7 +116,7 @@ export default function Contact() {
                     <div>
                       <div className="font-bold text-slate-900 mb-1 text-lg">Reach Us</div>
                       <p className="text-slate-500 leading-relaxed">
-                        Arkanj Tech Solutions, Pipratand Barwadda, Dhanbad – 82704, Jharkhand, India
+                        Arkanj Tech Solutions, Krishna Complex, Pipratand Barwadda Dhanbad, Opposite-Koylanchal school, Pin 826010
                       </p>
                     </div>
                   </div>
@@ -64,7 +126,7 @@ export default function Contact() {
                     </div>
                     <div>
                       <div className="font-bold text-slate-900 mb-1 text-lg">Email Us</div>
-                      <p className="text-slate-500">admin@arkanj.tech</p>
+                      <p className="text-slate-500">superadmin@arkanj.tech</p>
                     </div>
                   </div>
                   <div className="flex items-start gap-4 p-4 rounded-2xl border border-transparent transition-all duration-300 hover:border-brand-blue hover:bg-white hover:shadow-lg hover:ring-1 hover:ring-brand-blue/20 group">
@@ -73,20 +135,60 @@ export default function Contact() {
                     </div>
                     <div>
                       <div className="font-bold text-slate-900 mb-1 text-lg">Call Us</div>
-                      <p className="text-slate-500">+91 700-491-0317</p>
+                      <p className="text-slate-500">+91 70049 10317</p>
                     </div>
-                  </div>
+                  </div> 
                 </div>
-              </div>
-
-              <div className="bg-brand-navy p-8 rounded-3xl text-white">
-                <h3 className="text-xl font-bold mb-2">Call us Toll-Free</h3>
-                <div className="text-4xl font-black text-brand-blue tracking-tighter">0-000-0000-000</div>
               </div>
             </motion.div>
           </div>
         </div>
       </section>
+
+      {/* Success Modal */}
+      <AnimatePresence>
+        {isSubmitted && (
+          <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setIsSubmitted(false)}
+              className="absolute inset-0 bg-slate-900/60 backdrop-blur-sm"
+            />
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95, y: 20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.95, y: 20 }}
+              className="relative w-full max-w-md bg-white rounded-[2.5rem] shadow-2xl overflow-hidden p-8 md:p-10 text-center"
+            >
+              <button
+                onClick={() => setIsSubmitted(false)}
+                className="absolute top-6 right-6 p-2 hover:bg-slate-100 rounded-full transition-colors group"
+              >
+                <X className="w-6 h-6 text-slate-400 group-hover:text-brand-blue" />
+              </button>
+
+              <div className="mb-6">
+                <div className="w-20 h-20 bg-emerald-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <CheckCircle2 className="w-10 h-10 text-emerald-600" />
+                </div>
+                <h2 className="text-3xl font-extrabold text-brand-navy mb-2">Sent Successfully!</h2>
+                <p className="text-slate-500 leading-relaxed">
+                  Thank you for reaching out. We will contact you within <span className="text-brand-blue font-bold">24 hours</span>.
+                </p>
+              </div>
+
+              <button
+                onClick={() => setIsSubmitted(false)}
+                className="btn-primary w-full py-4 text-lg flex items-center justify-center gap-2 group"
+              >
+                Great, thanks! <ChevronRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+              </button>
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
 
       {/* Google Maps Embed Mockup */}
       <section className="h-[500px] w-full bg-slate-200 relative overflow-hidden">

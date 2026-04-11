@@ -4,6 +4,7 @@ import { BrainCircuit, Facebook, Twitter, Instagram, Linkedin, Mail, Phone, MapP
 import { Link } from 'react-router-dom';
 
 export default function Footer() {
+  const [logoError, setLogoError] = React.useState(false);
   return (
     <footer className="bg-brand-navy text-white pt-32 pb-12 relative overflow-hidden">
       <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
@@ -11,20 +12,40 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-12 gap-16 mb-24">
           <div className="col-span-1 md:col-span-4">
             <Link to="/" className="flex items-center gap-3 mb-8 group">
-              <img 
-                src="/logo.png" 
-                alt="Arkanj Tech Logo" 
-                className="h-20 w-auto object-contain" 
-                referrerPolicy="no-referrer"
-              />
+              <div className="relative h-16 flex items-center">
+                {!logoError ? (
+                  <img 
+                    src="/l2.png" 
+                    alt="Arkanj Tech Logo" 
+                    className="h-full w-auto object-contain" 
+                    onError={() => setLogoError(true)}
+                    referrerPolicy="no-referrer"
+                  />
+                ) : (
+                  <span className="text-2xl font-black text-white tracking-tighter">
+                    ARKANJ <span className="text-brand-blue">TECH</span>
+                  </span>
+                )}
+              </div>
             </Link>
             <p className="text-slate-400 text-base leading-relaxed mb-10 max-w-sm">
               Smart Automation. Simple AI. Real Growth for Everyone. Bridging the gap to an AI-driven future with precision and care.
             </p>
             <div className="flex gap-5">
-              {[Facebook, Twitter, Instagram, Linkedin].map((Icon, i) => (
-                <a key={i} href="#" className="w-11 h-11 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center hover:bg-brand-blue hover:border-brand-blue hover:-translate-y-1 transition-all duration-300">
-                  <Icon className="w-5 h-5" />
+              {[
+                { Icon: Facebook, href: "#" },
+                { Icon: Twitter, href: "#" },
+                { Icon: Instagram, href: "#" },
+                { Icon: Linkedin, href: "https://www.linkedin.com/in/admin-arkanj-08b18b402" }
+              ].map((social, i) => (
+                <a 
+                  key={i} 
+                  href={social.href} 
+                  target={social.href !== "#" ? "_blank" : undefined}
+                  rel={social.href !== "#" ? "noopener noreferrer" : undefined}
+                  className="w-11 h-11 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center hover:bg-brand-blue hover:border-brand-blue hover:-translate-y-1 transition-all duration-300"
+                >
+                  <social.Icon className="w-5 h-5" />
                 </a>
               ))}
             </div>
@@ -57,19 +78,19 @@ export default function Footer() {
                 <div className="w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center shrink-0">
                   <MapPin className="w-5 h-5 text-brand-blue" />
                 </div>
-                <span className="leading-relaxed">Pipratand Barwadda, Dhanbad – 82704, Jharkhand, India</span>
+                <span className="leading-relaxed">Krishna Complex, Pipratand Barwadda Dhanbad, Opposite-Koylanchal school, Pin 826010</span>
               </li>
               <li className="flex items-center gap-4">
                 <div className="w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center shrink-0">
                   <Mail className="w-5 h-5 text-brand-blue" />
                 </div>
-                <span>admin@arkanj.tech</span>
+                <span>superadmin@arkanj.tech</span>
               </li>
               <li className="flex items-center gap-4">
                 <div className="w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center shrink-0">
                   <Phone className="w-5 h-5 text-brand-blue" />
                 </div>
-                <span>+91 700-491-0317</span>
+                <span>+91 70049 10317</span>
               </li>
             </ul>
           </div>

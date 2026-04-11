@@ -4,10 +4,10 @@ import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import Home from './pages/Home';
 import Contact from './pages/Contact';
-import CustomerCabinet from './pages/CustomerCabinet';
 import Services from './pages/Services';
 import About from './pages/About';
-import { UserProvider } from './UserContext';
+import EduTechLanding from './pages/EduTechLanding';
+import GermanCourse from './pages/GermanCourse';
 
 function ScrollToTop() {
   const { pathname, hash } = useLocation();
@@ -24,26 +24,34 @@ function ScrollToTop() {
   return null;
 }
 
+function AppContent() {
+  const location = useLocation();
+  const isGermanPage = location.pathname === '/german';
+
+  return (
+    <div className="flex flex-col min-h-screen">
+      {!isGermanPage && <Navbar />}
+      <main className="flex-grow">
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/home" element={<Home />} /> 
+          <Route path="/contact" element={<Contact />} />
+          <Route path="/services" element={<Services />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/edutech" element={<EduTechLanding />} />
+          <Route path="/german" element={<GermanCourse />} />
+        </Routes>
+      </main>
+      {!isGermanPage && <Footer />}
+    </div>
+  );
+}
+
 export default function App() {
   return (
-    <UserProvider>
-      <Router>
-        <ScrollToTop />
-        <div className="flex flex-col min-h-screen">
-          <Navbar />
-          <main className="flex-grow">
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/home" element={<Home />} /> 
-              <Route path="/contact" element={<Contact />} />
-              <Route path="/customer-cabinet" element={<CustomerCabinet />} />
-              <Route path="/services" element={<Services />} />
-              <Route path="/about" element={<About />} />
-            </Routes>
-          </main>
-          <Footer />
-        </div>
-      </Router>
-    </UserProvider>
+    <Router>
+      <ScrollToTop />
+      <AppContent />
+    </Router>
   );
 }

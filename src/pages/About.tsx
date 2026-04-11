@@ -16,17 +16,32 @@ export default function About() {
     {
       name: 'Ranjita Sharma',
       role: 'Founder',
-      image: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&q=80&w=400'
+      image: '/ranjitha.jpeg'
     },
     {
       name: 'Jai Prakash Sharma',
       role: 'Founder and CEO',
-      image: 'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&q=80&w=400'
+      image: '/jai.png'
     },
     {
       name: 'Sujata Chandan',
-      role: 'COO and Director HR',
-      image: 'https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&q=80&w=400'
+      role: 'COO and Director-HR',
+      image: '/suj1.jpeg'
+    },
+    {
+      name: 'Manmohan Singh',
+      role: 'CSO',
+      image: '/manm.jpeg'
+    },
+    {
+      name: 'Mariya Rajiv',
+      role: 'Production Solution Architect',
+      image: '/rajiv.png'
+    },
+    {
+      name: 'Yug Mehendiratta',
+      role: 'Software Architect',
+      image: '/Yug.png'
     }
   ];
 
