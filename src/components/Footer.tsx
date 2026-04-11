@@ -12,7 +12,7 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-12 gap-16 mb-24">
           <div className="col-span-1 md:col-span-4">
             <Link to="/" className="flex items-center gap-3 mb-8 group">
-              <div className="relative h-16 flex items-center">
+              <div className="relative h-64 flex items-center">
                 {!logoError ? (
                   <img 
                     src="/l2.png" 

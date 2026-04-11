@@ -22,7 +22,7 @@ export default function Navbar() {
         <div className="flex justify-between h-20 relative">
           <div className="flex items-center">
             <Link to="/" className="flex items-center gap-3 group">
-              <div className="relative h-16 flex items-center">
+              <div className="relative h-20 flex items-center">
                 {!logoError ? (
                   <img 
                     src="/l2.png" 
