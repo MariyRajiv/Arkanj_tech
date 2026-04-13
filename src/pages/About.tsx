@@ -189,6 +189,9 @@ export default function About() {
                   alt="Professional team collaboration" 
                   className="w-full h-full object-cover"
                   referrerPolicy="no-referrer"
+                  loading="lazy"
+                  width="1000"
+                  height="1000"
                 />
               </div>
               <div className="absolute -bottom-10 -right-10 w-48 h-48 bg-brand-blue rounded-full blur-3xl opacity-20" />
@@ -272,7 +275,15 @@ export default function About() {
                 className="bg-white p-6 rounded-[3rem] shadow-2xl shadow-slate-200/50 border border-slate-100 group transition-all duration-300 hover:border-brand-blue hover:ring-1 hover:ring-brand-blue/20"
               >
                 <div className="aspect-[4/5] rounded-[2rem] overflow-hidden mb-8 relative">
-                  <img src={member.image} alt={member.name} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" referrerPolicy="no-referrer" />
+                  <img 
+                    src={member.image} 
+                    alt={member.name} 
+                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" 
+                    referrerPolicy="no-referrer"
+                    loading="lazy"
+                    width="400"
+                    height="500"
+                  />
                   <div className="absolute inset-0 bg-gradient-to-t from-brand-navy/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                 </div>
                 <h3 className="text-2xl font-bold text-brand-navy mb-2 group-hover:text-brand-blue transition-colors">{member.name}</h3>

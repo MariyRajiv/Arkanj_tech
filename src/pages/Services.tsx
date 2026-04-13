@@ -3,7 +3,7 @@ import { motion } from 'motion/react';
 import Markdown from 'react-markdown';
 import { SERVICES } from '@/src/types';
 import { Cpu, LayoutGrid, Send, Lightbulb, CreditCard, User, ArrowRight, CheckCircle2 } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { cn } from '@/src/lib/utils';
 import BookingModal from '@/src/components/BookingModal';
 import { UpTechIcon, FinTechIcon, EduTechIcon, DeepTechIcon, MedTechIcon, LaunchTechIcon } from '@/src/components/CustomIcons';
@@ -15,6 +15,19 @@ const iconMap: Record<string, any> = {
 
 export default function Services() {
   const [isBookingOpen, setIsBookingOpen] = React.useState(false);
+  const location = useLocation();
+  const [highlightedId, setHighlightedId] = React.useState<string | null>(null);
+
+  React.useEffect(() => {
+    const hash = location.hash.replace('#', '');
+    if (hash) {
+      setHighlightedId(hash);
+      const timer = setTimeout(() => {
+        setHighlightedId(null);
+      }, 3000);
+      return () => clearTimeout(timer);
+    }
+  }, [location.hash]);
 
   return (
     <div className="pt-20 grid-pattern">
@@ -44,9 +57,11 @@ export default function Services() {
         <div className="absolute inset-0 opacity-30">
           <img 
             src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&q=80&w=2000" 
-            alt="Tech" 
+            alt="Tech background" 
             className="w-full h-full object-cover"
             referrerPolicy="no-referrer"
+            width="2000"
+            height="1000"
           />
         </div>
         <div className="absolute inset-0 bg-gradient-to-b from-brand-navy/60 via-brand-navy/90 to-brand-navy" />
@@ -79,18 +94,25 @@ export default function Services() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
             {SERVICES.map((service, i) => {
               const Icon = iconMap[service.icon];
+              const isHighlighted = highlightedId === service.id;
+              
               return (
                 <motion.div
                   key={service.id}
+                  id={service.id}
                   initial={{ opacity: 0, x: i % 2 === 0 ? -30 : 30 }}
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.6, delay: i * 0.1 }}
+                  animate={isHighlighted ? { scale: 1.05, y: -10 } : { scale: 1, y: 0 }}
                   className={cn(
-                    "flex flex-col sm:flex-row gap-8 p-10 rounded-[2.5rem] border transition-all duration-300 group relative overflow-hidden",
+                    "flex flex-col sm:flex-row gap-8 p-10 rounded-[2.5rem] border transition-all duration-500 group relative overflow-hidden",
                     service.highlighted 
                       ? "bg-brand-navy border-brand-blue shadow-[0_30px_60px_rgba(59,130,246,0.3)] ring-1 ring-brand-blue/50" 
-                      : "border-slate-100 bg-white/80 backdrop-blur-sm hover:border-brand-blue hover:shadow-[0_30px_60px_rgba(59,130,246,0.1)] hover:ring-1 hover:ring-brand-blue/20"
+                      : cn(
+                          "border-slate-100 bg-white/80 backdrop-blur-sm hover:border-brand-blue hover:shadow-[0_30px_60px_rgba(59,130,246,0.1)] hover:ring-1 hover:ring-brand-blue/20",
+                          isHighlighted && "border-brand-blue shadow-[0_30px_60px_rgba(59,130,246,0.2)] ring-2 ring-brand-blue/40"
+                        )
                   )}
                 >
                   {service.highlighted && (

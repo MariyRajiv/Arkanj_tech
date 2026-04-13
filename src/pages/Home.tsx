@@ -66,6 +66,8 @@ export default function Home() {
             alt="Tech background" 
             className="w-full h-full object-cover opacity-10"
             referrerPolicy="no-referrer"
+            width="2000"
+            height="1000"
           />
           <div className="absolute inset-0 bg-gradient-to-br from-brand-navy via-brand-navy/95 to-brand-blue/20" />
         </div>
@@ -107,7 +109,7 @@ export default function Home() {
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 1 }}
-              className="relative hidden lg:block pt-12"
+              className="relative block pt-12"
             >
               <div 
                 onClick={() => heroMedia[currentMediaIndex].type === 'video' && setIsVideoModalOpen(true)}
@@ -123,14 +125,33 @@ export default function Home() {
                       initial={{ opacity: 0 }}
                       animate={{ opacity: 1 }}
                       exit={{ opacity: 0 }}
-                      className="w-full h-full relative"
+                      className="w-full h-full relative group/video"
                     >
-                      <iframe
-                        src={heroMedia[currentMediaIndex].url}
-                        className="w-full h-full object-cover rounded-3xl shadow-2xl pointer-events-none"
-                        allow="autoplay; encrypted-media"
-                        title="Hero Video"
-                      />
+                      {!isVideoModalOpen ? (
+                        <div className="relative w-full h-full cursor-pointer" onClick={() => setIsVideoModalOpen(true)}>
+                          <img 
+                            src={heroMedia[currentMediaIndex].poster} 
+                            alt="Video Poster" 
+                            className="w-full h-full object-cover rounded-3xl shadow-2xl"
+                            width="800"
+                            height="600"
+                          />
+                          <div className="absolute inset-0 flex items-center justify-center">
+                            <div className="w-20 h-20 bg-brand-blue/90 rounded-full flex items-center justify-center shadow-2xl group-hover/video:scale-110 transition-transform">
+                              <div className="w-0 h-0 border-t-[10px] border-t-transparent border-l-[18px] border-l-white border-b-[10px] border-b-transparent ml-1" />
+                            </div>
+                          </div>
+                        </div>
+                      ) : (
+                        <iframe
+                          src={heroMedia[currentMediaIndex].url}
+                          className="w-full h-full object-cover rounded-3xl shadow-2xl"
+                          allow="autoplay; encrypted-media"
+                          title="Hero Video"
+                          width="800"
+                          height="600"
+                        />
+                      )}
                     </motion.div>
                   ) : (
                     <motion.img
@@ -143,6 +164,8 @@ export default function Home() {
                       transition={{ duration: 0.7 }}
                       className="w-full h-full object-cover rounded-3xl shadow-2xl"
                       referrerPolicy="no-referrer"
+                      width="800"
+                      height="600"
                     />
                   )}
                 </AnimatePresence>
@@ -151,12 +174,14 @@ export default function Home() {
                 <button 
                   onClick={(e) => { e.stopPropagation(); prevMedia(); }}
                   className="absolute left-6 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-white flex items-center justify-center opacity-0 group-hover/slider:opacity-100 transition-all hover:bg-brand-blue hover:border-brand-blue z-30"
+                  aria-label="Previous slide"
                 >
                   <ChevronLeft className="w-7 h-7" />
                 </button>
                 <button 
                   onClick={(e) => { e.stopPropagation(); nextMedia(); }}
                   className="absolute right-6 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-white flex items-center justify-center opacity-0 group-hover/slider:opacity-100 transition-all hover:bg-brand-blue hover:border-brand-blue z-30"
+                  aria-label="Next slide"
                 >
                   <ChevronRight className="w-7 h-7" />
                 </button>
@@ -201,7 +226,7 @@ export default function Home() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
           >
-            <h2 className="text-4xl md:text-6xl font-bold text-slate-900 mb-6 tracking-tight leading-tight">
+            <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-6 tracking-tight leading-tight">
               Unlock Your <span className="text-brand-blue bg-clip-text text-transparent bg-gradient-to-r from-brand-blue to-brand-accent">Competitive Edge</span> Now
             </h2>
             <div className="text-lg text-slate-500 mb-12 leading-relaxed text-center max-w-3xl mx-auto">
@@ -386,6 +411,9 @@ export default function Home() {
                   src={item.img} 
                   alt={item.title}
                   className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                  loading="lazy"
+                  width="800"
+                  height="600"
                   onError={(e) => {
                     (e.target as HTMLImageElement).src = `https://picsum.photos/seed/port${i+1}/800/600`;
                   }}
@@ -470,6 +498,9 @@ export default function Home() {
                     src={testimonial.image} 
                     alt={testimonial.name} 
                     className="w-40 h-40 rounded-full mb-6 border-4 border-brand-blue p-1 object-cover shadow-xl"
+                    loading="lazy"
+                    width="160"
+                    height="160"
                     referrerPolicy="no-referrer"
                   />
                   <div className="font-bold text-brand-navy text-xl">{testimonial.name}</div>

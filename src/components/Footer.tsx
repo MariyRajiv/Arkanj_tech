@@ -12,7 +12,7 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-12 gap-16 mb-24">
           <div className="col-span-1 md:col-span-4">
             <Link to="/" className="flex items-center gap-3 mb-8 group">
-              <div className="relative h-64 flex items-center">
+              <div className="relative h-16 flex items-center">
                 {!logoError ? (
                   <img 
                     src="/l2.png" 
@@ -33,10 +33,10 @@ export default function Footer() {
             </p>
             <div className="flex gap-5">
               {[
-                { Icon: Facebook, href: "#" },
-                { Icon: Twitter, href: "#" },
-                { Icon: Instagram, href: "#" },
-                { Icon: Linkedin, href: "https://www.linkedin.com/in/admin-arkanj-08b18b402" }
+                { Icon: Facebook, href: "#", label: "Facebook" },
+                { Icon: Twitter, href: "#", label: "Twitter" },
+                { Icon: Instagram, href: "#", label: "Instagram" },
+                { Icon: Linkedin, href: "https://www.linkedin.com/in/admin-arkanj-08b18b402", label: "LinkedIn" }
               ].map((social, i) => (
                 <a 
                   key={i} 
@@ -44,6 +44,7 @@ export default function Footer() {
                   target={social.href !== "#" ? "_blank" : undefined}
                   rel={social.href !== "#" ? "noopener noreferrer" : undefined}
                   className="w-11 h-11 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center hover:bg-brand-blue hover:border-brand-blue hover:-translate-y-1 transition-all duration-300"
+                  aria-label={social.label}
                 >
                   <social.Icon className="w-5 h-5" />
                 </a>
@@ -52,17 +53,19 @@ export default function Footer() {
           </div>
 
           <div className="col-span-1 md:col-span-2">
-            <h4 className="text-sm font-bold uppercase tracking-widest text-brand-blue mb-8">Services</h4>
+            <h3 className="text-sm font-bold uppercase tracking-widest text-brand-blue mb-8">Services</h3>
             <ul className="space-y-4 text-slate-400 text-sm font-medium">
-              <li><Link to="/services" className="hover:text-white transition-colors">UpTech – Industry</Link></li>
-              <li><Link to="/services" className="hover:text-white transition-colors">FinTech – Finance</Link></li>
-              <li><Link to="/services" className="hover:text-white transition-colors">EduTech – Individuals</Link></li>
-              <li><Link to="/services" className="hover:text-white transition-colors">DeepTech – Advanced</Link></li>
+              <li><Link to="/services#uptech" className="hover:text-white transition-colors">UpTech – Industry</Link></li>
+              <li><Link to="/services#fintech" className="hover:text-white transition-colors">FinTech – Finance</Link></li>
+              <li><Link to="/services#edutech" className="hover:text-white transition-colors">EduTech – Individuals</Link></li>
+              <li><Link to="/services#deeptech" className="hover:text-white transition-colors">DeepTech – Advanced</Link></li>
+              <li><Link to="/services#medtech" className="hover:text-white transition-colors">MedTech – Healthcare</Link></li>
+              <li><Link to="/services#launchtech" className="hover:text-white transition-colors">LaunchTech – Startups</Link></li>
             </ul>
           </div>
 
           <div className="col-span-1 md:col-span-2">
-            <h4 className="text-sm font-bold uppercase tracking-widest text-brand-blue mb-8">Company</h4>
+            <h3 className="text-sm font-bold uppercase tracking-widest text-brand-blue mb-8">Company</h3>
             <ul className="space-y-4 text-slate-400 text-sm font-medium">
               <li><Link to="/about" className="hover:text-white transition-colors">About Us</Link></li>
               <li><Link to="/#portfolio" className="hover:text-white transition-colors">Portfolio</Link></li>
@@ -72,7 +75,7 @@ export default function Footer() {
           </div>
 
           <div className="col-span-1 md:col-span-4">
-            <h4 className="text-sm font-bold uppercase tracking-widest text-brand-blue mb-8">Contact Us</h4>
+            <h3 className="text-sm font-bold uppercase tracking-widest text-brand-blue mb-8">Contact Us</h3>
             <ul className="space-y-6 text-slate-400 text-sm font-medium">
               <li className="flex items-start gap-4">
                 <div className="w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center shrink-0">
@@ -96,7 +99,7 @@ export default function Footer() {
           </div>
         </div>
         
-        <div className="border-t border-white/5 pt-12 flex flex-col md:flex-row justify-between items-center gap-6 text-slate-500 text-xs font-bold uppercase tracking-widest">
+        <div className="border-t border-white/5 pt-12 flex flex-col md:flex-row justify-between items-center gap-6 text-slate-400 text-xs font-bold uppercase tracking-widest">
           <p>© 2026 Arkanj Tech Solutions. All rights reserved.</p>
           <div className="flex gap-10">
             <a href="#" className="hover:text-white transition-colors">Privacy Policy</a>

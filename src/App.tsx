@@ -8,6 +8,7 @@ import Services from './pages/Services';
 import About from './pages/About';
 import EduTechLanding from './pages/EduTechLanding';
 import GermanCourse from './pages/GermanCourse';
+import NotFound from './pages/NotFound';
 
 function ScrollToTop() {
   const { pathname, hash } = useLocation();
@@ -26,11 +27,14 @@ function ScrollToTop() {
 
 function AppContent() {
   const location = useLocation();
+  const validRoutes = ['/', '/home', '/contact', '/services', '/about', '/edutech', '/edutech/german'];
   const isGermanPage = location.pathname === '/edutech/german';
+  const is404Page = !validRoutes.includes(location.pathname);
+  const hideLayout = isGermanPage || is404Page;
 
   return (
     <div className="flex flex-col min-h-screen">
-      {!isGermanPage && <Navbar />}
+      {!hideLayout && <Navbar />}
       <main className="flex-grow">
         <Routes>
           <Route path="/" element={<Home />} />
@@ -40,9 +44,10 @@ function AppContent() {
           <Route path="/about" element={<About />} />
           <Route path="/edutech" element={<EduTechLanding />} />
           <Route path="/edutech/german" element={<GermanCourse />} />
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </main>
-      {!isGermanPage && <Footer />}
+      {!hideLayout && <Footer />}
     </div>
   );
 }
