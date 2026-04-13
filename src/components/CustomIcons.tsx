@@ -5,11 +5,18 @@ interface IconProps {
   className?: string;
 }
 
-const CustomIcon = ({ src, alt, Fallback, className }: { src: string, alt: string, Fallback: React.ElementType, className?: string }) => {
+const CustomIcon = ({ src, alt, Fallback, className, width = "64", height = "64", loading = "lazy" }: { 
+  src: string, 
+  alt: string, 
+  Fallback: React.ElementType, 
+  className?: string,
+  width?: string,
+  height?: string,
+  loading?: "lazy" | "eager"
+}) => {
   const [error, setError] = React.useState(false);
 
   const handleLoad = (e: React.SyntheticEvent<HTMLImageElement>) => {
-    // If image is empty (0 natural width), trigger fallback
     if (e.currentTarget.naturalWidth === 0) {
       setError(true);
     }
@@ -21,6 +28,9 @@ const CustomIcon = ({ src, alt, Fallback, className }: { src: string, alt: strin
         <img 
           src={src} 
           alt={alt} 
+          width={width}
+          height={height}
+          loading={loading}
           className="w-full h-full object-contain transition-opacity duration-300" 
           onLoad={handleLoad}
           onError={() => setError(true)}

@@ -1,14 +1,15 @@
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
-import React from 'react';
+import React, { Suspense, lazy } from 'react';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import Home from './pages/Home';
-import Contact from './pages/Contact';
-import Services from './pages/Services';
-import About from './pages/About';
-import EduTechLanding from './pages/EduTechLanding';
-import GermanCourse from './pages/GermanCourse';
-import NotFound from './pages/NotFound';
+
+const Contact = lazy(() => import('./pages/Contact'));
+const Services = lazy(() => import('./pages/Services'));
+const About = lazy(() => import('./pages/About'));
+const EduTechLanding = lazy(() => import('./pages/EduTechLanding'));
+const GermanCourse = lazy(() => import('./pages/GermanCourse'));
+const NotFound = lazy(() => import('./pages/NotFound'));
 
 function ScrollToTop() {
   const { pathname, hash } = useLocation();
@@ -36,16 +37,18 @@ function AppContent() {
     <div className="flex flex-col min-h-screen">
       {!hideLayout && <Navbar />}
       <main className="flex-grow">
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/home" element={<Home />} /> 
-          <Route path="/contact" element={<Contact />} />
-          <Route path="/services" element={<Services />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/edutech" element={<EduTechLanding />} />
-          <Route path="/edutech/german" element={<GermanCourse />} />
-          <Route path="*" element={<NotFound />} />
-        </Routes>
+        <Suspense fallback={<div className="min-h-screen flex items-center justify-center bg-brand-navy text-white">Loading...</div>}>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/home" element={<Home />} /> 
+            <Route path="/contact" element={<Contact />} />
+            <Route path="/services" element={<Services />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/edutech" element={<EduTechLanding />} />
+            <Route path="/edutech/german" element={<GermanCourse />} />
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </Suspense>
       </main>
       {!hideLayout && <Footer />}
     </div>

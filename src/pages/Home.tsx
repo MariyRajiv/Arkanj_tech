@@ -24,23 +24,23 @@ export default function Home() {
       type: 'video', 
       url: "https://www.youtube.com/embed/5jXLY2nIxSo?autoplay=1&mute=1&loop=1&playlist=5jXLY2nIxSo&controls=0&showinfo=0&rel=0&modestbranding=1&iv_load_policy=3",
       modalUrl: "https://www.youtube.com/embed/5jXLY2nIxSo?autoplay=1&rel=0",
-      poster: "https://images.unsplash.com/photo-1557426272-fc759fbb7a8d?auto=format&fit=crop&q=80&w=1000"
+      poster: "https://images.unsplash.com/photo-1557426272-fc759fbb7a8d?auto=format&fit=crop&q=80&w=800"
     },
     { 
       type: 'image', 
-      url: "https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&q=80&w=1000" 
+      url: "https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&q=80&w=800" 
     },
     { 
       type: 'image', 
-      url: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&q=80&w=1000" 
+      url: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&q=80&w=800" 
     },
     { 
       type: 'image', 
-      url: "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?auto=format&fit=crop&q=80&w=1000" 
+      url: "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?auto=format&fit=crop&q=80&w=800" 
     },
     { 
       type: 'image', 
-      url: "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&q=80&w=1000" 
+      url: "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&q=80&w=800" 
     }
   ];
 
@@ -62,24 +62,19 @@ export default function Home() {
         <div className="absolute inset-0 z-0">
           <div className="absolute inset-0 grid-pattern-light opacity-30" />
           <img 
-            src="https://images.unsplash.com/photo-1557426272-fc759fbb7a8d?auto=format&fit=crop&q=80&w=2000" 
+            src="https://images.unsplash.com/photo-1557426272-fc759fbb7a8d?auto=format&fit=crop&q=80&w=1200" 
             alt="Tech background" 
             className="w-full h-full object-cover opacity-10"
             referrerPolicy="no-referrer"
-            width="2000"
-            height="1000"
+            width="1200"
+            height="600"
           />
           <div className="absolute inset-0 bg-gradient-to-br from-brand-navy via-brand-navy/95 to-brand-blue/20" />
         </div>
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 pt-2 pb-16">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-start">
-            <motion.div
-              initial={{ opacity: 0, x: -50 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8 }}
-              className="pt-2"
-            >
+            <div className="pt-2">
               <h1 className="text-5xl md:text-7xl font-extrabold text-white tracking-tight leading-[1.1] mb-6">
                 Smart Automation. <br />
                 <span className="text-brand-blue bg-clip-text text-transparent bg-gradient-to-r from-brand-blue to-brand-accent">Simple AI.</span>
@@ -92,25 +87,20 @@ export default function Home() {
               <div className="flex flex-wrap gap-4">
                 <button 
                   onClick={() => setIsBookingOpen(true)}
-                  className="btn-primary text-base px-8 py-4 flex items-center gap-2"
+                  className="btn-primary text-base px-8 py-4 flex items-center gap-2 min-w-[48px] min-h-[48px]"
                 >
                   Book Appointment <ArrowRight className="w-4 h-4" />
                 </button>
                 <Link 
                   to="/services"
-                  className="bg-white/5 backdrop-blur-xl border border-white/10 text-white px-8 py-4 rounded-xl font-bold text-base hover:bg-white/10 transition-all active:scale-95"
+                  className="bg-white/5 backdrop-blur-xl border border-white/10 text-white px-8 py-4 rounded-xl font-bold text-base hover:bg-white/10 transition-all active:scale-95 min-w-[48px] min-h-[48px] flex items-center"
                 >
                   Our Services
                 </Link>
               </div>
-            </motion.div>
+            </div>
 
-            <motion.div
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 1 }}
-              className="relative block pt-12"
-            >
+            <div className="relative block pt-12">
               <div 
                 onClick={() => heroMedia[currentMediaIndex].type === 'video' && setIsVideoModalOpen(true)}
                 className={cn(
@@ -199,20 +189,21 @@ export default function Home() {
                 </div>
 
                 {/* Slider Indicators */}
-                <div className="absolute bottom-8 right-8 flex gap-2 z-20">
+                <div className="absolute bottom-8 right-8 flex gap-3 z-20">
                   {heroMedia.map((_, i) => (
                     <button
                       key={i}
                       onClick={(e) => { e.stopPropagation(); setCurrentMediaIndex(i); }}
-                      className={`h-1.5 rounded-full transition-all duration-500 ${
-                        i === currentMediaIndex ? "bg-brand-blue w-10" : "bg-white/40 w-2.5 hover:bg-white/60"
+                      aria-label={`Go to slide ${i + 1}`}
+                      className={`h-3 rounded-full transition-all duration-500 min-w-[12px] ${
+                        i === currentMediaIndex ? "bg-brand-blue w-10" : "bg-white/40 w-3 hover:bg-white/60"
                       }`}
                     />
                   ))}
                 </div>
               </div>
               <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-brand-blue/20 blur-[120px] -z-10 rounded-full" />
-            </motion.div>
+            </div>
           </div>
         </div>
       </section>
