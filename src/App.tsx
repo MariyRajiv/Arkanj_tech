@@ -1,7 +1,6 @@
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import React, { Suspense, lazy } from 'react';
 import Navbar from './components/Navbar';
-import Footer from './components/Footer';
 import Home from './pages/Home';
 
 const Contact = lazy(() => import('./pages/Contact'));
@@ -10,6 +9,7 @@ const About = lazy(() => import('./pages/About'));
 const EduTechLanding = lazy(() => import('./pages/EduTechLanding'));
 const GermanCourse = lazy(() => import('./pages/GermanCourse'));
 const NotFound = lazy(() => import('./pages/NotFound'));
+const Footer = lazy(() => import('./components/Footer'));
 
 function ScrollToTop() {
   const { pathname, hash } = useLocation();
@@ -50,7 +50,9 @@ function AppContent() {
           </Routes>
         </Suspense>
       </main>
-      {!hideLayout && <Footer />}
+      <Suspense fallback={null}>
+        {!hideLayout && <Footer />}
+      </Suspense>
     </div>
   );
 }

@@ -44,25 +44,25 @@ const CustomIcon = ({ src, alt, Fallback, className, width = "64", height = "64"
 };
 
 export const UpTechIcon = ({ className }: IconProps) => (
-  <CustomIcon src="/uptech.png" alt="UpTech" Fallback={Cpu} className={className} />
+  <CustomIcon src="/uptech.png" alt="UpTech" Fallback={Cpu} className={className} width="100" height="100" />
 );
 
 export const FinTechIcon = ({ className }: IconProps) => (
-  <CustomIcon src="/fintech.png" alt="FinTech" Fallback={CreditCard} className={className} />
+  <CustomIcon src="/fintech.png" alt="FinTech" Fallback={CreditCard} className={className} width="100" height="100" />
 );
 
 export const EduTechIcon = ({ className }: IconProps) => (
-  <CustomIcon src="/edutech.png" alt="EduTech" Fallback={GraduationCap} className={className} />
+  <CustomIcon src="/edutech.png" alt="EduTech" Fallback={GraduationCap} className={className} width="100" height="100" />
 );
 
 export const DeepTechIcon = ({ className }: IconProps) => (
-  <CustomIcon src="/deeptech.png" alt="DeepTech" Fallback={Cpu} className={className} />
+  <CustomIcon src="/deeptech.png" alt="DeepTech" Fallback={Cpu} className={className} width="100" height="100" />
 );
 
 export const MedTechIcon = ({ className }: IconProps) => (
-  <CustomIcon src="/bio.png" alt="MedTech" Fallback={Microscope} className={className} />
+  <CustomIcon src="/bio.png" alt="MedTech" Fallback={Microscope} className={className} width="100" height="100" />
 );
 
 export const LaunchTechIcon = ({ className }: IconProps) => (
-  <CustomIcon src="/rocket.png" alt="LaunchTech" Fallback={Rocket} className={className} />
+  <CustomIcon src="/rocket.png" alt="LaunchTech" Fallback={Rocket} className={className} width="100" height="100" />
 );

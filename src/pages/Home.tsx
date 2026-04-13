@@ -68,6 +68,8 @@ export default function Home() {
             referrerPolicy="no-referrer"
             width="1200"
             height="600"
+            loading="eager"
+            fetchPriority="high"
           />
           <div className="absolute inset-0 bg-gradient-to-br from-brand-navy via-brand-navy/95 to-brand-blue/20" />
         </div>
@@ -110,11 +112,8 @@ export default function Home() {
               >
                 <AnimatePresence mode="wait">
                   {heroMedia[currentMediaIndex].type === 'video' ? (
-                    <motion.div
+                    <div
                       key="video"
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
-                      exit={{ opacity: 0 }}
                       className="w-full h-full relative group/video"
                     >
                       {!isVideoModalOpen ? (
@@ -125,6 +124,8 @@ export default function Home() {
                             className="w-full h-full object-cover rounded-3xl shadow-2xl"
                             width="800"
                             height="600"
+                            loading="eager"
+                            fetchPriority="high"
                           />
                           <div className="absolute inset-0 flex items-center justify-center">
                             <div className="w-20 h-20 bg-brand-blue/90 rounded-full flex items-center justify-center shadow-2xl group-hover/video:scale-110 transition-transform">
@@ -142,20 +143,18 @@ export default function Home() {
                           height="600"
                         />
                       )}
-                    </motion.div>
+                    </div>
                   ) : (
-                    <motion.img
+                    <img
                       key={currentMediaIndex}
                       src={heroMedia[currentMediaIndex].url}
                       alt="Solutions Showcase"
-                      initial={{ opacity: 0, scale: 1.1 }}
-                      animate={{ opacity: 1, scale: 1 }}
-                      exit={{ opacity: 0, scale: 0.9 }}
-                      transition={{ duration: 0.7 }}
                       className="w-full h-full object-cover rounded-3xl shadow-2xl"
                       referrerPolicy="no-referrer"
                       width="800"
                       height="600"
+                      loading="eager"
+                      fetchPriority="high"
                     />
                   )}
                 </AnimatePresence>
