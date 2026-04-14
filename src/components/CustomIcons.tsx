@@ -44,25 +44,25 @@ const CustomIcon = ({ src, alt, Fallback, className, width = "64", height = "64"
 };
 
 export const UpTechIcon = ({ className }: IconProps) => (
-  <CustomIcon src="/uptech.png" alt="UpTech" Fallback={Cpu} className={className} width="100" height="100" />
+  <div className={className}><Cpu className="w-full h-full" /></div>
 );
 
 export const FinTechIcon = ({ className }: IconProps) => (
-  <CustomIcon src="/fintech.png" alt="FinTech" Fallback={CreditCard} className={className} width="100" height="100" />
+  <div className={className}><CreditCard className="w-full h-full" /></div>
 );
 
 export const EduTechIcon = ({ className }: IconProps) => (
-  <CustomIcon src="/edutech.png" alt="EduTech" Fallback={GraduationCap} className={className} width="100" height="100" />
+  <div className={className}><GraduationCap className="w-full h-full" /></div>
 );
 
 export const DeepTechIcon = ({ className }: IconProps) => (
-  <CustomIcon src="/deeptech.png" alt="DeepTech" Fallback={Cpu} className={className} width="100" height="100" />
+  <div className={className}><Cpu className="w-full h-full" /></div>
 );
 
 export const MedTechIcon = ({ className }: IconProps) => (
-  <CustomIcon src="/bio.png" alt="MedTech" Fallback={Microscope} className={className} width="100" height="100" />
+  <div className={className}><Microscope className="w-full h-full" /></div>
 );
 
 export const LaunchTechIcon = ({ className }: IconProps) => (
-  <CustomIcon src="/rocket.png" alt="LaunchTech" Fallback={Rocket} className={className} width="100" height="100" />
+  <div className={className}><Rocket className="w-full h-full" /></div>
 );

@@ -53,7 +53,7 @@ export default function Footer() {
           </div>
 
           <div className="col-span-1 md:col-span-2">
-            <h3 className="text-sm font-bold uppercase tracking-widest text-brand-blue mb-8">Services</h3>
+            <h3 className="text-sm font-bold uppercase tracking-widest text-blue-400 mb-8">Services</h3>
             <ul className="space-y-4 text-slate-400 text-sm font-medium">
               <li><Link to="/services#uptech" className="hover:text-white transition-colors">UpTech – Industry</Link></li>
               <li><Link to="/services#fintech" className="hover:text-white transition-colors">FinTech – Finance</Link></li>
@@ -65,7 +65,7 @@ export default function Footer() {
           </div>
 
           <div className="col-span-1 md:col-span-2">
-            <h3 className="text-sm font-bold uppercase tracking-widest text-brand-blue mb-8">Company</h3>
+            <h3 className="text-sm font-bold uppercase tracking-widest text-blue-400 mb-8">Company</h3>
             <ul className="space-y-4 text-slate-400 text-sm font-medium">
               <li><Link to="/about" className="hover:text-white transition-colors">About Us</Link></li>
               <li><Link to="/#portfolio" className="hover:text-white transition-colors">Portfolio</Link></li>
@@ -75,7 +75,7 @@ export default function Footer() {
           </div>
 
           <div className="col-span-1 md:col-span-4">
-            <h3 className="text-sm font-bold uppercase tracking-widest text-brand-blue mb-8">Contact Us</h3>
+            <h3 className="text-sm font-bold uppercase tracking-widest text-blue-400 mb-8">Contact Us</h3>
             <ul className="space-y-6 text-slate-400 text-sm font-medium">
               <li className="flex items-start gap-4">
                 <div className="w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center shrink-0">

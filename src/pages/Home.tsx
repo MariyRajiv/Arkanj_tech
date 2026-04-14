@@ -8,6 +8,8 @@ import BookingModal from '@/src/components/BookingModal';
 import { UpTechIcon, FinTechIcon, EduTechIcon, DeepTechIcon, MedTechIcon, LaunchTechIcon } from '@/src/components/CustomIcons';
 import { cn } from '@/src/lib/utils';
 
+const ServicesGrid = React.lazy(() => import('@/src/components/ServicesGrid'));
+
 const iconMap: Record<string, any> = {
   Cpu, LayoutGrid, Send, Lightbulb, CreditCard, User, 
   UpTechIcon, FinTechIcon, EduTechIcon, DeepTechIcon, MedTechIcon, LaunchTechIcon
@@ -17,29 +19,30 @@ export default function Home() {
   const navigate = useNavigate();
   const [isBookingOpen, setIsBookingOpen] = React.useState(false);
   const [currentMediaIndex, setCurrentMediaIndex] = React.useState(0);
+  const [loadVideo, setLoadVideo] = React.useState(false);
 
   const heroMedia = [
     { 
       type: 'video', 
       id: "5jXLY2nIxSo",
       url: "https://www.youtube-nocookie.com/embed/5jXLY2nIxSo",
-      poster: "https://images.unsplash.com/photo-1557426272-fc759fbb7a8d?auto=format&fit=crop&q=80&w=800"
+      poster: "https://images.unsplash.com/photo-1557426272-fc759fbb7a8d?auto=format&fit=crop&q=80&w=800&auto=format"
     },
     { 
       type: 'image', 
-      url: "https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&q=80&w=800" 
+      url: "https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&q=80&w=800&auto=format" 
     },
     { 
       type: 'image', 
-      url: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&q=80&w=800" 
+      url: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&q=80&w=800&auto=format" 
     },
     { 
       type: 'image', 
-      url: "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?auto=format&fit=crop&q=80&w=800" 
+      url: "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?auto=format&fit=crop&q=80&w=800&auto=format" 
     },
     { 
       type: 'image', 
-      url: "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&q=80&w=800" 
+      url: "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&q=80&w=800&auto=format" 
     }
   ];
 
@@ -50,8 +53,18 @@ export default function Home() {
     const isVideo = heroMedia[currentMediaIndex].type === 'video';
     const duration = isVideo ? 30000 : 3000; // 30s for video, 3s for images
     
+    let videoTimer: any;
+    if (isVideo) {
+      videoTimer = setTimeout(() => setLoadVideo(true), 2000);
+    } else {
+      setLoadVideo(false);
+    }
+
     const timer = setTimeout(nextMedia, duration);
-    return () => clearTimeout(timer);
+    return () => {
+      clearTimeout(timer);
+      if (videoTimer) clearTimeout(videoTimer);
+    };
   }, [currentMediaIndex]);
 
   return (
@@ -113,15 +126,26 @@ export default function Home() {
                       key="video"
                       className="w-full h-full relative rounded-3xl overflow-hidden shadow-2xl bg-black"
                     >
-                      <iframe
-                        src={`${heroMedia[currentMediaIndex].url}?autoplay=1&mute=1&controls=0&loop=1&playlist=${heroMedia[currentMediaIndex].id}&rel=0&modestbranding=1&iv_load_policy=3&enablejsapi=1`}
-                        className="w-full h-full scale-110" // Scale slightly to hide black bars if any
-                        allow="autoplay; encrypted-media"
-                        title="Arkanj Tech Intro"
-                        width="800"
-                        height="600"
-                        loading="lazy"
-                      />
+                      {loadVideo ? (
+                        <iframe
+                          src={`${heroMedia[currentMediaIndex].url}?autoplay=1&mute=1&controls=0&loop=1&playlist=${heroMedia[currentMediaIndex].id}&rel=0&modestbranding=1&iv_load_policy=3&enablejsapi=1`}
+                          className="w-full h-full scale-110"
+                          allow="autoplay; encrypted-media"
+                          title="Arkanj Tech Intro"
+                          width="800"
+                          height="600"
+                        />
+                      ) : (
+                        <img 
+                          src={heroMedia[currentMediaIndex].poster} 
+                          alt="Video Poster" 
+                          className="w-full h-full object-cover"
+                          width="800"
+                          height="600"
+                          loading="eager"
+                          fetchPriority="high"
+                        />
+                      )}
                     </div>
                   ) : (
                     <img
@@ -173,10 +197,12 @@ export default function Home() {
                       key={i}
                       onClick={(e) => { e.stopPropagation(); setCurrentMediaIndex(i); }}
                       aria-label={`Go to slide ${i + 1}`}
-                      className={`h-3 rounded-full transition-all duration-500 min-w-[12px] ${
-                        i === currentMediaIndex ? "bg-brand-blue w-10" : "bg-white/40 w-3 hover:bg-white/60"
-                      }`}
-                    />
+                      className="group p-2 -m-2" // Increase touch target size
+                    >
+                      <div className={`h-3 rounded-full transition-all duration-500 min-w-[12px] ${
+                        i === currentMediaIndex ? "bg-brand-blue w-10" : "bg-white/40 w-3 group-hover:bg-white/60"
+                      }`} />
+                    </button>
                   ))}
                 </div>
               </div>
@@ -222,101 +248,9 @@ export default function Home() {
       </section>
 
       {/* Services Grid */}
-      <section className="py-32 relative">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-20">
-            <motion.span 
-              initial={{ opacity: 0, y: 10 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              className="text-brand-blue font-bold tracking-[0.3em] uppercase text-xs mb-4 block"
-            >
-              Our Expertise
-            </motion.span>
-            <motion.h2 
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              className="text-5xl font-extrabold text-brand-navy tracking-tight"
-            >
-              Tailored Solutions for <span className="text-brand-blue">Every Industry</span>
-            </motion.h2>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {SERVICES.map((service, i) => {
-              const Icon = iconMap[service.icon];
-              return (
-                <motion.div
-                  key={service.id}
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: i * 0.1, duration: 0.5 }}
-                  whileHover={{ y: -10, scale: 1.02 }}
-                  className={cn(
-                    "group card-modern relative overflow-hidden transition-all duration-500",
-                    service.highlighted 
-                      ? "bg-brand-navy border-brand-blue shadow-[0_20px_50px_rgba(59,130,246,0.3)] ring-1 ring-brand-blue/50" 
-                      : "bg-white border-slate-100"
-                  )}
-                >
-                  {service.highlighted && (
-                    <div className="absolute top-0 right-0 w-full h-1 bg-gradient-to-r from-brand-blue via-brand-accent to-brand-blue animate-gradient-x" />
-                  )}
-                  <div className={cn(
-                    "absolute top-0 right-0 w-32 h-32 blur-3xl rounded-full -mr-16 -mt-16 transition-colors",
-                    service.highlighted ? "bg-brand-blue/20" : "bg-brand-blue/5 group-hover:bg-brand-blue/10"
-                  )} />
-                  <div className={cn(
-                    "w-16 h-16 rounded-2xl flex items-center justify-center mb-8 transition-all duration-500 group-hover:scale-110 group-hover:rotate-3 shadow-sm",
-                    service.highlighted ? "bg-brand-blue text-white shadow-lg shadow-brand-blue/40" : "bg-brand-light text-brand-blue group-hover:bg-brand-blue group-hover:text-white"
-                  )}>
-                    <Icon className="w-12 h-12" />
-                  </div>
-                  <h3 className={cn(
-                    "text-2xl font-bold mb-4 transition-colors",
-                    service.highlighted ? "text-white group-hover:text-brand-blue" : "text-brand-navy group-hover:text-brand-blue"
-                  )}>{service.title}</h3>
-                  <div className={cn(
-                    "leading-relaxed mb-8 markdown-content",
-                    service.highlighted ? "text-slate-300" : "text-slate-500"
-                  )}>
-                    <Markdown>{service.description}</Markdown>
-                  </div>
-                  <div className={cn(
-                    "pt-8 border-t flex items-center justify-between",
-                    service.highlighted ? "border-white/10" : "border-slate-100"
-                  )}>
-                    <span className={cn(
-                      "text-xs font-bold uppercase tracking-widest",
-                      service.highlighted ? "text-brand-blue" : "text-slate-400"
-                    )}>{service.category}</span>
-                    {service.id === 'edutech' ? (
-                      <Link 
-                        to="/edutech"
-                        className={cn(
-                          "font-bold text-sm flex items-center gap-2 group-hover:gap-3 transition-all text-brand-blue"
-                        )}
-                      >
-                        Get Started <ArrowRight className="w-4 h-4" />
-                      </Link>
-                    ) : (
-                      <button 
-                        onClick={() => setIsBookingOpen(true)}
-                        className={cn(
-                          "font-bold text-sm flex items-center gap-2 group-hover:gap-3 transition-all text-brand-blue"
-                        )}
-                      >
-                        Get Started <ArrowRight className="w-4 h-4" />
-                      </button>
-                    )}
-                  </div>
-                </motion.div>
-              );
-            })}
-          </div>
-        </div>
-      </section>
+      <React.Suspense fallback={<div className="py-32 text-center text-slate-400">Loading Services...</div>}>
+        <ServicesGrid onBookingClick={() => setIsBookingOpen(true)} />
+      </React.Suspense>
 
       {/* Portfolio Section */}
       <section id="portfolio" className="py-32 bg-slate-50/50 relative overflow-hidden grid-pattern">
