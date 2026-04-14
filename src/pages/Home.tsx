@@ -17,13 +17,12 @@ export default function Home() {
   const navigate = useNavigate();
   const [isBookingOpen, setIsBookingOpen] = React.useState(false);
   const [currentMediaIndex, setCurrentMediaIndex] = React.useState(0);
-  const [isVideoModalOpen, setIsVideoModalOpen] = React.useState(false);
 
   const heroMedia = [
     { 
       type: 'video', 
-      url: "https://www.youtube.com/embed/5jXLY2nIxSo?autoplay=1&mute=1&loop=1&playlist=5jXLY2nIxSo&controls=0&showinfo=0&rel=0&modestbranding=1&iv_load_policy=3",
-      modalUrl: "https://www.youtube.com/embed/5jXLY2nIxSo?autoplay=1&rel=0",
+      id: "5jXLY2nIxSo",
+      url: "https://www.youtube-nocookie.com/embed/5jXLY2nIxSo",
       poster: "https://images.unsplash.com/photo-1557426272-fc759fbb7a8d?auto=format&fit=crop&q=80&w=800"
     },
     { 
@@ -104,45 +103,25 @@ export default function Home() {
 
             <div className="relative block pt-12">
               <div 
-                onClick={() => heroMedia[currentMediaIndex].type === 'video' && setIsVideoModalOpen(true)}
                 className={cn(
-                  "relative z-10 glass-dark p-6 rounded-[2.5rem] border-white/10 overflow-hidden aspect-[4/3] group/slider",
-                  heroMedia[currentMediaIndex].type === 'video' && "cursor-pointer"
+                  "relative z-10 glass-dark p-6 rounded-[2.5rem] border-white/10 overflow-hidden aspect-[4/3] group/slider"
                 )}
               >
                 <AnimatePresence mode="wait">
                   {heroMedia[currentMediaIndex].type === 'video' ? (
                     <div
                       key="video"
-                      className="w-full h-full relative group/video"
+                      className="w-full h-full relative rounded-3xl overflow-hidden shadow-2xl bg-black"
                     >
-                      {!isVideoModalOpen ? (
-                        <div className="relative w-full h-full cursor-pointer" onClick={() => setIsVideoModalOpen(true)}>
-                          <img 
-                            src={heroMedia[currentMediaIndex].poster} 
-                            alt="Video Poster" 
-                            className="w-full h-full object-cover rounded-3xl shadow-2xl"
-                            width="800"
-                            height="600"
-                            loading="eager"
-                            fetchPriority="high"
-                          />
-                          <div className="absolute inset-0 flex items-center justify-center">
-                            <div className="w-20 h-20 bg-brand-blue/90 rounded-full flex items-center justify-center shadow-2xl group-hover/video:scale-110 transition-transform">
-                              <div className="w-0 h-0 border-t-[10px] border-t-transparent border-l-[18px] border-l-white border-b-[10px] border-b-transparent ml-1" />
-                            </div>
-                          </div>
-                        </div>
-                      ) : (
-                        <iframe
-                          src={heroMedia[currentMediaIndex].url}
-                          className="w-full h-full object-cover rounded-3xl shadow-2xl"
-                          allow="autoplay; encrypted-media"
-                          title="Hero Video"
-                          width="800"
-                          height="600"
-                        />
-                      )}
+                      <iframe
+                        src={`${heroMedia[currentMediaIndex].url}?autoplay=1&mute=1&controls=0&loop=1&playlist=${heroMedia[currentMediaIndex].id}&rel=0&modestbranding=1&iv_load_policy=3&enablejsapi=1`}
+                        className="w-full h-full scale-110" // Scale slightly to hide black bars if any
+                        allow="autoplay; encrypted-media"
+                        title="Arkanj Tech Intro"
+                        width="800"
+                        height="600"
+                        loading="lazy"
+                      />
                     </div>
                   ) : (
                     <img
@@ -175,20 +154,20 @@ export default function Home() {
                   <ChevronRight className="w-7 h-7" />
                 </button>
                 
-                <div className="absolute bottom-6 left-6 glass p-5 rounded-2xl z-20 shadow-xl border-white/20">
-                  <div className="flex items-center gap-4">
-                    <div className="w-12 h-12 bg-brand-blue rounded-xl flex items-center justify-center shadow-lg shadow-brand-blue/20">
-                      <BrainCircuit className="w-6 h-6 text-white" />
+                <div className="absolute bottom-4 left-4 md:bottom-6 md:left-6 glass p-3 md:p-5 rounded-xl md:rounded-2xl z-20 shadow-xl border-white/20 scale-90 md:scale-100 origin-bottom-left">
+                  <div className="flex items-center gap-3 md:gap-4">
+                    <div className="w-10 h-10 md:w-12 md:h-12 bg-brand-blue rounded-lg md:rounded-xl flex items-center justify-center shadow-lg shadow-brand-blue/20">
+                      <BrainCircuit className="w-5 h-5 md:w-6 md:h-6 text-white" />
                     </div>
                     <div>
-                      <div className="text-2xl font-bold text-brand-navy">98%</div>
-                      <div className="text-[11px] font-bold text-slate-500 uppercase tracking-widest">Success Rate</div>
+                      <div className="text-xl md:text-2xl font-bold text-brand-navy leading-none">98%</div>
+                      <div className="text-[9px] md:text-[11px] font-bold text-slate-500 uppercase tracking-widest mt-1">Success Rate</div>
                     </div>
                   </div>
                 </div>
 
                 {/* Slider Indicators */}
-                <div className="absolute bottom-8 right-8 flex gap-3 z-20">
+                <div className="absolute bottom-4 right-4 md:bottom-8 md:right-8 flex gap-2 md:gap-3 z-20 scale-90 md:scale-100 origin-bottom-right">
                   {heroMedia.map((_, i) => (
                     <button
                       key={i}
@@ -524,40 +503,6 @@ export default function Home() {
       </section>
 
       <BookingModal isOpen={isBookingOpen} onClose={() => setIsBookingOpen(false)} />
-
-      {/* Video Modal */}
-      <AnimatePresence>
-        {isVideoModalOpen && (
-          <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 md:p-10">
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              onClick={() => setIsVideoModalOpen(false)}
-              className="absolute inset-0 bg-brand-navy/95 backdrop-blur-xl"
-            />
-            <motion.div
-              initial={{ opacity: 0, scale: 0.9, y: 20 }}
-              animate={{ opacity: 1, scale: 1, y: 0 }}
-              exit={{ opacity: 0, scale: 0.9, y: 20 }}
-              className="relative w-full max-w-6xl aspect-video bg-black rounded-3xl overflow-hidden shadow-2xl border border-white/10"
-            >
-              <iframe
-                src={heroMedia[0].modalUrl}
-                className="w-full h-full"
-                allow="autoplay; encrypted-media; fullscreen"
-                title="Video Player"
-              />
-              <button
-                onClick={() => setIsVideoModalOpen(false)}
-                className="absolute top-6 right-6 w-12 h-12 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-white flex items-center justify-center hover:bg-white/20 transition-all z-10"
-              >
-                <ChevronLeft className="w-6 h-6 rotate-90" />
-              </button>
-            </motion.div>
-          </div>
-        )}
-      </AnimatePresence>
     </div>
   );
 }
