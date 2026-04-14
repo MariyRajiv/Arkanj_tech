@@ -29,8 +29,12 @@ function ScrollToTop() {
 function AppContent() {
   const location = useLocation();
   const validRoutes = ['/', '/home', '/contact', '/services', '/about', '/edutech', '/edutech/german'];
-  const isGermanPage = location.pathname === '/edutech/german';
-  const is404Page = !validRoutes.includes(location.pathname);
+  
+  // Normalize path by removing trailing slash for consistent route checking
+  const normalizedPath = location.pathname === '/' ? '/' : location.pathname.replace(/\/$/, '');
+  
+  const isGermanPage = normalizedPath === '/edutech/german';
+  const is404Page = !validRoutes.includes(normalizedPath);
   const hideLayout = isGermanPage || is404Page;
 
   return (
