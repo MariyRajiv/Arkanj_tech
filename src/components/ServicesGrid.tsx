@@ -64,10 +64,20 @@ export default function ServicesGrid({ onBookingClick }: ServicesGridProps) {
                   service.highlighted ? "bg-brand-blue/20" : "bg-brand-blue/5 group-hover:bg-brand-blue/10"
                 )} />
                 <div className={cn(
-                  "w-16 h-16 rounded-2xl flex items-center justify-center mb-8 transition-all duration-500 group-hover:scale-110 group-hover:rotate-3 shadow-sm",
+                  "rounded-2xl flex items-center justify-center mb-8 transition-all duration-500 group-hover:scale-110 group-hover:rotate-3 shadow-sm overflow-hidden",
+                  (service.id === 'medtech' || service.id === 'launchtech') ? "w-32 h-32" : "w-24 h-24",
                   service.highlighted ? "bg-brand-blue text-white shadow-lg shadow-brand-blue/40" : "bg-brand-light text-brand-blue group-hover:bg-brand-blue group-hover:text-white"
                 )}>
-                  <Icon className="w-12 h-12" />
+                  {Icon ? (
+                    <Icon className="w-14 h-14" />
+                  ) : (
+                    <img 
+                      src={service.icon} 
+                      alt={service.title} 
+                      className="w-full h-full object-contain"
+                      referrerPolicy="no-referrer"
+                    />
+                  )}
                 </div>
                 <h3 className={cn(
                   "text-2xl font-bold mb-4 transition-colors",

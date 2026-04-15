@@ -25,7 +25,7 @@ export default function Navbar() {
               <div className="relative h-16 flex items-center">
                 {!logoError ? (
                   <img 
-                    src="/l2.png" 
+                    src="/Final Logo.png" 
                     alt="Arkanj Tech Logo" 
                     className="h-full w-auto object-contain" 
                     onError={() => setLogoError(true)}

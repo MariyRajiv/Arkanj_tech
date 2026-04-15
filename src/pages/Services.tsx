@@ -119,10 +119,20 @@ export default function Services() {
                     <div className="absolute top-0 left-0 w-1 h-full bg-gradient-to-b from-brand-blue via-brand-accent to-brand-blue animate-gradient-y" />
                   )}
                   <div className={cn(
-                    "w-20 h-20 rounded-3xl flex items-center justify-center shrink-0 transition-all duration-500 shadow-sm group-hover:scale-110",
+                    "rounded-3xl flex items-center justify-center shrink-0 transition-all duration-500 shadow-sm group-hover:scale-110 overflow-hidden",
+                    (service.id === 'medtech' || service.id === 'launchtech') ? "w-32 h-32" : "w-24 h-24",
                     service.highlighted ? "bg-brand-blue text-white shadow-lg shadow-brand-blue/40" : "bg-brand-light text-brand-blue group-hover:bg-brand-blue group-hover:text-white"
                   )}>
-                    <Icon className="w-14 h-14" />
+                    {Icon ? (
+                      <Icon className="w-16 h-16" />
+                    ) : (
+                      <img 
+                        src={service.icon} 
+                        alt={service.title} 
+                        className="w-full h-full object-contain"
+                        referrerPolicy="no-referrer"
+                      />
+                    )}
                   </div>
                   <div className="space-y-6">
                     <div className="flex justify-between items-start">

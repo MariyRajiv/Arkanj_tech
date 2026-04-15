@@ -66,7 +66,7 @@ export default function About() {
   return (
     <div className="pt-20 grid-pattern">
       {/* Hero Section */}
-      <section className="pt-32 pb-48 bg-brand-navy text-white relative overflow-hidden mesh-gradient">
+      <section className="pt-12 pb-42 bg-brand-navy text-white relative overflow-hidden mesh-gradient">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
