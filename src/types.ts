@@ -66,7 +66,7 @@ export const SERVICES: Service[] = [
     title: 'LaunchTech',
     description: '**The All-In-One Founder’s Engine.** We build high-conversion websites, authority-building blogs, and robust custom software designed to scale with your user base.\n\n From strategic **naming and domain registration** to complete visual rebranding, we secure your digital footprint from day one',
     price: 200,
-    icon: '/launctech.png',
+    icon: '/launchtech.png',
     category: 'Startups'
   }
 ];

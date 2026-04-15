@@ -16,19 +16,13 @@
 
 @layer base {
   html {
-   
-     scroll-behavior: smooth;
+    scroll-behavior: smooth;
     overflow-x: hidden;
-    height: 100%;
-    overscroll-behavior: none;
   }
 
   body {
     @apply font-sans bg-white text-slate-900 antialiased selection:bg-brand-blue/10 selection:text-brand-blue;
     overflow-x: hidden;
-    touch-action: pan-y;
-    height: 100%;
-    overscroll-behavior: none;
   }
   
   h1, h2, h3, h4, h5, h6 {

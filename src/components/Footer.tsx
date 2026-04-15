@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 export default function Footer() {
   const [logoError, setLogoError] = React.useState(false);
   return (
-    <footer className="bg-brand-navy text-white pt-100 pb-12 relative overflow-hidden">
+    <footer className="bg-brand-navy text-white pt-20 pb-12 relative overflow-hidden">
       <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-16 mb-24">

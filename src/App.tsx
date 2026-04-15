@@ -13,6 +13,7 @@ const Footer = lazy(() => import('./components/Footer'));
 
 function ScrollToTop() {
   const { pathname, hash } = useLocation();
+  
   React.useEffect(() => {
     if (hash) {
       const element = document.getElementById(hash.slice(1));
@@ -20,9 +21,18 @@ function ScrollToTop() {
         element.scrollIntoView({ behavior: 'smooth' });
       }
     } else {
-      window.scrollTo(0, 0);
+      // Use a small timeout to ensure the DOM has updated and scroll is possible
+      const timer = setTimeout(() => {
+        window.scrollTo({
+          top: 0,
+          left: 0,
+          behavior: 'instant' as any // Use 'instant' to override CSS smooth scroll for page transitions
+        });
+      }, 0);
+      return () => clearTimeout(timer);
     }
   }, [pathname, hash]);
+  
   return null;
 }
 
