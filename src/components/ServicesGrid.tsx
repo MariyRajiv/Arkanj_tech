@@ -5,10 +5,10 @@ import { cn } from '@/src/lib/utils';
 import { UpTechIcon, FinTechIcon, EduTechIcon, DeepTechIcon, MedTechIcon, LaunchTechIcon } from '@/src/components/CustomIcons';
 import { Link } from 'react-router-dom';
 import Markdown from 'react-markdown';
-import { ArrowRight, Cpu, LayoutGrid, Send, Lightbulb, CreditCard, User } from 'lucide-react';
+import { ArrowRight, Cpu, LayoutGrid, Send, Lightbulb, CreditCard, User, FileText } from 'lucide-react';
 
 const iconMap: Record<string, any> = {
-  Cpu, LayoutGrid, Send, Lightbulb, CreditCard, User,
+  Cpu, LayoutGrid, Send, Lightbulb, CreditCard, User, FileText,
   UpTechIcon, FinTechIcon, EduTechIcon, DeepTechIcon, MedTechIcon, LaunchTechIcon
 };
 
@@ -100,6 +100,15 @@ export default function ServicesGrid({ onBookingClick }: ServicesGridProps) {
                   {service.id === 'edutech' ? (
                     <Link 
                       to="/edutech"
+                      className={cn(
+                        "font-bold text-sm flex items-center gap-2 group-hover:gap-3 transition-all text-brand-blue"
+                      )}
+                    >
+                      Get Started <ArrowRight className="w-4 h-4" />
+                    </Link>
+                  ) : service.id === 'uptech' ? (
+                    <Link 
+                      to="/uptech"
                       className={cn(
                         "font-bold text-sm flex items-center gap-2 group-hover:gap-3 transition-all text-brand-blue"
                       )}

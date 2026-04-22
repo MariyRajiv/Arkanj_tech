@@ -7,6 +7,12 @@ export default defineConfig(({mode}) => {
   const env = loadEnv(mode, '.', '');
   return {
     plugins: [react(), tailwindcss()],
+    define: {
+      'process.env.GEMINI_API_KEY': JSON.stringify(env.GEMINI_API_KEY),
+      '__VUE_OPTIONS_API__': true,
+      '__VUE_PROD_DEVTOOLS__': false,
+      '__VUE_PROD_HYDRATION_MISMATCH_DETAILS__': false,
+    },
     resolve: {
       alias: {
         '@': path.resolve(__dirname, '.'),
@@ -19,12 +25,16 @@ export default defineConfig(({mode}) => {
             'vendor-react': ['react', 'react-dom', 'react-router-dom'],
             'vendor-motion': ['motion/react'],
             'vendor-icons': ['lucide-react'],
+            'vendor-chat': ['@n8n/chat'],
+            'vendor-utils': ['date-fns', 'clsx', 'tailwind-merge', 'react-markdown'],
           },
         },
       },
-      chunkSizeWarningLimit: 1000,
+      chunkSizeWarningLimit: 2000,
     },
     server: {
+      // HMR is disabled in AI Studio via DISABLE_HMR env var.
+      // Do not modifyâfile watching is disabled to prevent flickering during agent edits.
       hmr: process.env.DISABLE_HMR !== 'true',
     },
   };

@@ -3,14 +3,29 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Arkanj Tech</title>
+    <link rel="icon" type="image/png" href="/favicon.png" />
+
+    <title>Arkanj Tech | Smart Automation & AI Solutions</title>
     <meta name="description" content="Arkanj Tech provides AI-driven automation and software solutions to bridge the gap to an AI-driven future with precision and care." />
-    <link rel="preload" as="image" href="https://images.unsplash.com/photo-1557426272-fc759fbb7a8d?auto=format&fit=crop&q=80&w=1200&auto=format" fetchpriority="high">
+    <!-- Replace the broken preload link -->
+    <link rel="preload" as="image" href="https://unsplash.com" fetchpriority="high">
+
     <style>
       :root { --brand-navy: #0F172A; --brand-blue: #2563EB; }
       body { margin: 0; font-family: system-ui, -apple-system, sans-serif; background: #fff; color: #0F172A; }
-      .hero-critical { background: #0F172A; min-height: 70vh; display: flex; align-items: center; }
+      
+      /* Update your hero background to use the same working URL */
+      .hero-critical { 
+        background: linear-gradient(rgba(15, 23, 42, 0.8), rgba(15, 23, 42, 0.8)), 
+                    url('https://unsplash.com');
+        background-size: cover;
+        background-position: center;
+        min-height: 70vh; 
+        display: flex; 
+        align-items: center; 
+      }
     </style>
+
   </head>
   <body>
     <div id="root"></div>

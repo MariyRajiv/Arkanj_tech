@@ -171,6 +171,13 @@ export default function Services() {
                           >
                             Get Started <ArrowRight className="w-4 h-4" />
                           </Link>
+                        ) : service.id === 'uptech' ? (
+                          <Link 
+                            to="/uptech"
+                            className="text-brand-blue font-bold flex items-center gap-2 hover:gap-3 transition-all"
+                          >
+                            Get Started <ArrowRight className="w-4 h-4" />
+                          </Link>
                         ) : (
                           <button 
                             onClick={() => setIsBookingOpen(true)}

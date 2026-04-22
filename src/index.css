@@ -28,6 +28,23 @@
   h1, h2, h3, h4, h5, h6 {
     @apply font-display tracking-tight;
   }
+
+  /* n8n Chat Customization */
+  :root {
+    --chat--color--primary: #2563EB; /* brand-blue */
+    --chat--color--primary-shade-50: #1D4ED8;
+    --chat--color--primary--shade-100: #1E40AF;
+    --chat--color--secondary: #6366F1; /* brand-accent */
+    --chat--color-secondary-shade-50: #4F46E5;
+    --chat--color-dark: #0F172A; /* brand-navy */
+    
+    --chat--window--z-index: 9998;
+    --chat--window--border-radius: 1.5rem;
+    --chat--header--background: #0F172A;
+    --chat--header--color: #ffffff;
+    
+    --chat--toggle--size: 60px;
+  }
 }
 
 @layer components {

@@ -40,7 +40,7 @@ export default function About() {
     },
     {
       name: 'Yug Mehendiratta',
-      role: 'Software Architect',
+      role: 'UX Analyst',
       image: '/Yug.png'
     }
   ];
@@ -90,49 +90,66 @@ export default function About() {
 
       {/* Feature Cards Overlapping Hero */}
       <section className="-mt-32 relative z-20 pb-24">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {[
-              { 
-                title: 'Who Are We', 
-                content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec ullamcorper mattis, pulvinar. Etiam erat lectus, finibus eget commodo quis, tinci dunt eget leo. Nullam quis vulpu tate orci, ac accum san quam.' 
-              },
-              { 
-                title: 'Our Mission', 
-                content: 'Ut elit tellus, luctus nec ullamcorper mattis, pulvinar. Etiam erat lectus, finibus eget commodo quis, tinci dunt eget leo. Nullam quis vulpu tate orci, ac accum san quam. Morbi frin gilla congue libero.' 
-              },
-              { 
-                title: 'What We Do', 
-                items: ['UI UX Design', 'Website Development', 'Marketing', 'Social Media', 'eCommerce Store', 'Tech Support'] 
-              }
-            ].map((card, i) => (
-              <motion.div
-                key={i}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.1 }}
-                className="bg-white p-10 rounded-[2.5rem] shadow-2xl shadow-slate-200/50 border border-slate-100 flex flex-col transition-all duration-300 hover:border-brand-blue hover:shadow-[0_20px_50px_rgba(59,130,246,0.1)] hover:ring-1 hover:ring-brand-blue/20"
-              >
-                <div className="w-12 h-1.5 bg-brand-blue mb-8 rounded-full" />
-                <h3 className="text-3xl font-extrabold text-brand-navy mb-6 tracking-tight">{card.title}</h3>
-                {card.content && (
-                  <p className="text-slate-500 leading-relaxed text-lg">{card.content}</p>
-                )}
-                {card.items && (
-                  <ul className="space-y-3">
-                    {card.items.map((item, idx) => (
-                      <li key={idx} className="flex items-center gap-3 text-slate-600 font-semibold">
-                        <ChevronRight className="w-4 h-4 text-brand-blue" /> {item}
-                      </li>
-                    ))}
-                  </ul>
-                )}
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
+  <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+      {[
+        { 
+          title: 'Who Are We', 
+          content: 'We bridge the gap between traditional sectors and the AI-driven future. We specialize in deploying comprehensive AI solutions from specialized Agentic AI to large-scale automation. Whether you are an enterprise, a startup, or an individual, we provide the tools to help you digitalize, optimize, and outpace the competition.'
+        },
+        {     
+          title: 'Our Mission & Vision', 
+          content: [
+            'To bridge human potential and artificial intelligence through solutions that empower careers, businesses, and innovation journeys.',
+            'To build a world where intelligent technology helps people learn better, decide faster, and grow beyond boundaries.'
+          ]
+        },
+        { 
+          title: 'What We Do', 
+          items: ['UI UX Design', 'Website Development', 'Marketing', 'Social Media', 'eCommerce Store', 'Tech Support'] 
+        }
+      ].map((card, i) => (
+        <motion.div
+          key={i}
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ delay: i * 0.1 }}
+          className="bg-white p-10 rounded-[2.5rem] shadow-2xl shadow-slate-200/50 border border-slate-100 flex flex-col transition-all duration-300 hover:border-brand-blue hover:shadow-[0_20px_50px_rgba(59,130,246,0.1)] hover:ring-1 hover:ring-brand-blue/20"
+        >
+          <div className="w-12 h-1.5 bg-brand-blue mb-8 rounded-full" />
+          <h3 className="text-3xl font-extrabold text-brand-navy mb-6 tracking-tight">{card.title}</h3>
+          
+          {/* Logic to handle single string or array of strings */}
+          {card.content && (
+            <div className="text-slate-500 leading-relaxed text-lg">
+              {Array.isArray(card.content) ? (
+                card.content.map((paragraph, idx) => (
+                  <p key={idx} className={idx > 0 ? "mt-4" : ""}>
+                    {paragraph}
+                  </p>
+                ))
+              ) : (
+                <p>{card.content}</p>
+              )}
+            </div>
+          )}
+
+          {card.items && (
+            <ul className="space-y-3">
+              {card.items.map((item, idx) => (
+                <li key={idx} className="flex items-center gap-3 text-slate-600 font-semibold">
+                  <ChevronRight className="w-4 h-4 text-brand-blue" /> {item}
+                </li>
+              ))}
+            </ul>
+          )}
+        </motion.div>
+      ))}
+    </div>
+  </div>
+</section>
+
 
       {/* 6-D Process Section */}
       <section className="py-32 bg-white relative overflow-hidden">

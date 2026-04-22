@@ -26,7 +26,7 @@ export default function Home() {
       type: 'video', 
       id: "5jXLY2nIxSo",
       url: "https://www.youtube-nocookie.com/embed/5jXLY2nIxSo",
-      poster: "https://images.unsplash.com/photo-1557426272-fc759fbb7a8d?auto=format&fit=crop&q=80&w=800&auto=format"
+      poster: "https://images.unsplash.com/photo-1557426272-fc759fbb7a8d?auto=format&fit=crop&q=80&w=1200"
     },
     { 
       type: 'image', 
@@ -70,7 +70,7 @@ export default function Home() {
   return (
     <div className="pt-20 grid-pattern">
       {/* Hero Section */}
-      <section className="relative min-h-[70vh] flex items-start overflow-hidden mesh-gradient">
+      <section className="relative min-h-[70vh] flex items-start overflow-hidden mesh-gradient hero-critical">
         <div className="absolute inset-0 z-0">
           <div className="absolute inset-0 grid-pattern-light opacity-30" />
           <img 
@@ -78,6 +78,7 @@ export default function Home() {
             alt="Tech background" 
             className="w-full h-full object-cover opacity-10"
             referrerPolicy="no-referrer"
+            crossOrigin="anonymous"
             width="1200"
             height="600"
             loading="eager"
@@ -86,7 +87,7 @@ export default function Home() {
           <div className="absolute inset-0 bg-gradient-to-br from-brand-navy via-brand-navy/95 to-brand-blue/20" />
         </div>
 
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 pt-2 pb-16">
+        <div className="max-w-8xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 pt-2 pb-16">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-start">
             <div className="pt-2">
               <h1 className="text-5xl md:text-7xl font-extrabold text-white tracking-tight leading-[1.1] mb-6">
@@ -221,7 +222,7 @@ export default function Home() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
           >
-            <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-6 tracking-tight leading-tight">
+            <h2 className="text-3xl md:text-6xl font-bold text-slate-900 mb-6 tracking-tight leading-tight">
               Unlock Your <span className="text-brand-blue bg-clip-text text-transparent bg-gradient-to-r from-brand-blue to-brand-accent">Competitive Edge</span> Now
             </h2>
             <div className="text-lg text-slate-500 mb-12 leading-relaxed text-center max-w-3xl mx-auto">
